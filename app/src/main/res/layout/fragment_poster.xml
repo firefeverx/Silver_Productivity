@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <!-- TOP PART-->
+    <RelativeLayout
+        android:id = "@+id/top_part"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_button"
+            android:src = "@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+            android:clickable="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Location of the poster"
+            android:id="@+id/location_poster"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/response_poster_button"
+            android:clickable="true"
+            android:src = "@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <!-- CONTENT OF POSTER-->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/content_poster_layout"
+        android:layout_below = "@id/top_part">
+
+        <!-- UPPER PART -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id = "@+id/content_upper_part">
+
+            <!-- NUMBER LIKE -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:id= "@+id/number_like">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/text_number_like"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:src  ="@drawable/heart_like_2"
+                    android:layout_below="@+id/text_number_like"
+                    android:id = "@+id/image_number_like"/>
+             </RelativeLayout>
+
+            <!-- CONTENT OF POSTER -->
+            <TextView
+                android:layout_width="fill_parent"
+                android:id = "@+id/content_poster"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/number_like">
+
+            </TextView>
+        </RelativeLayout>
+
+        <!-- LOWER PART -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/content_poster_lower"
+            android:layout_below="@+id/content_upper_part">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:id = "@+id/location_text"
+                android:text="Location"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/location_text"
+                android:id = "@+id/submit_time_text"
+                android:text="Location"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
+                android:id = "@+id/num_answer"
+                android:text="Location"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <!-- CONTENT OF ANSWER -->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/list_answer"
+        android:layout_below="@id/content_poster_layout">
+     </ListView>
+
+
+    <!-- BOTTOM PART -->
+    <RelativeLayout
+        android:id = "@+id/below_part"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_poster_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Say something kind..."
+            android:layout_alignParentLeft="true"
+            android:id="@+id/comment_poster" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_poster"
+            android:text = "Post"
+            android:layout_toRightOf="@id/comment_poster"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</RelativeLayout>
