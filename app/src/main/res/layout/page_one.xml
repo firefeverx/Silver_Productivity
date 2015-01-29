@@ -45,7 +45,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/MidSection"
         android:background="#ffffff">
 
@@ -116,5 +116,68 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/BtmSection"></LinearLayout>
+        android:id="@+id/BtmSection"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="How do i cope with stress?"
+            android:id="@+id/textView8"
+            android:layout_gravity="top"
+            android:layout_marginTop="50dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/BtmInnerSection">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Singapore"
+                android:id="@+id/textView6"
+                android:layout_gravity="top"
+                android:layout_marginTop="40dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3"
+                android:layout_gravity="top|left"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/speech_bubble_117740_2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="8"
+                android:id="@+id/textView9"
+                android:layout_gravity="top"
+                android:layout_marginTop="30dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView6"
+                android:src="@drawable/heart_like_2"
+                android:layout_gravity="top"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="7"
+                android:id="@+id/textView10"
+                android:layout_gravity="top"
+                android:layout_marginTop="30dp" />
+
+        </LinearLayout>
 </LinearLayout>
