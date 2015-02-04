@@ -130,7 +130,7 @@ public class PosterFragment extends Fragment {
 
     private void sendResultToDatabase() {
 
-        
+
     }
 
     /**
@@ -166,7 +166,7 @@ public class PosterFragment extends Fragment {
         Response Button
         When button click, go to fragment response (page 4)
          */
-        ImageView responseButton = (ImageView) rootView.findViewById(R.id.response_button);
+        ImageView responseButton = (ImageView) rootView.findViewById(R.id.response_poster_button);
         responseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
