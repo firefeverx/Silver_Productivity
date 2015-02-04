@@ -1,5 +1,6 @@
 package com.example.bernard.silver_productivity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -46,6 +47,13 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void GoNextPage(View v)
+    {
+        Intent i = new Intent(getApplicationContext(), SubActivity.class);
+        startActivity(i);
+        System.out.println("hihi");
+
+    }
     /**
      * A placeholder fragment containing a simple view.
      */
