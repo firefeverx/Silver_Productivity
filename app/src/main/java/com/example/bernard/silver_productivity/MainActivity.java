@@ -1,5 +1,6 @@
 package com.example.bernard.silver_productivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.app.AlertDialog;
+
 
 
 public class MainActivity extends ActionBarActivity {
@@ -49,10 +53,62 @@ public class MainActivity extends ActionBarActivity {
 
     public void GoNextPage(View v)
     {
+        int phoneNum = 0;
+        boolean NumDigitsStatus;
         Intent i = new Intent(getApplicationContext(), SubActivity.class);
-        startActivity(i);
-        System.out.println("hihi");
 
+
+        //System.out.println("hihi");
+
+        try {
+            EditText eTextPhoneNum = (EditText) findViewById(R.id.txtPhoneNum);
+            phoneNum = Integer.parseInt(eTextPhoneNum.getText().toString());
+            NumDigitsStatus = CheckNumOfDigits(phoneNum);
+
+            System.out.println("Phone Num status" + NumDigitsStatus);
+            if(NumDigitsStatus == true)
+            {
+                startActivity(i);
+
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.toString());
+
+        }
+
+
+    }
+
+    private boolean CheckNumOfDigits(int phoneNum)
+    {
+        AlertDialog alert = new AlertDialog.Builder(this).create();
+
+        if(phoneNum >= 90000000 && phoneNum <= 99999999)
+        {
+            return true;
+        }
+        else
+        {
+
+            alert.setTitle("Error");
+            alert.setMessage("Please enter your 8 digits phone number.");
+            alert.setButton("OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+
+                }
+
+            });
+            //alert.setIcon(R.drawable.icon);
+            alert.show();
+        }
+
+
+        return false;
     }
     /**
      * A placeholder fragment containing a simple view.

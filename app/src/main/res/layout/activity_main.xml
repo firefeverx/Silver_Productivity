@@ -105,7 +105,10 @@
                     android:textSize="20dp"
                     android:layout_gravity="top|left"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:autoText="true"
+                    android:inputType="number|phone"
+                    android:selectAllOnFocus="true" />
 
             </LinearLayout>
 
