@@ -128,6 +128,9 @@ public class PosterFragment extends Fragment {
         });
     }
 
+    /*
+    Send the result to database. Use some function from API
+     */
     private void sendResultToDatabase() {
 
 
