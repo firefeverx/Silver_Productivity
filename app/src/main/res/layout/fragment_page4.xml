@@ -41,9 +41,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/content_input"/>
 
-    <KeyboardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"/>
+
 
 </RelativeLayout>

@@ -24,9 +24,6 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
     private static PosterFragmentAdapter instance = null;
     private ArrayList<Poster> posters = new ArrayList<Poster>();
 
-
-
-
     public PosterFragmentAdapter(Context context, int resource, ArrayList<Poster> posters){
         super (context, resource);
         this.posters = posters;
@@ -40,6 +37,7 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.single_answer_layout, parent, false);
         }
+
 
         setLayoutInformation(v);
         return v;
