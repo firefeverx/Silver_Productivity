@@ -1,9 +1,15 @@
 package com.example.bernard.silver_productivity;
 
+import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
 
 public class SubActivity extends ActionBarActivity {
@@ -36,4 +42,16 @@ public class SubActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void GoFriendsPage(View v)
+    {
+        //Intent i = new Intent(getApplicationContext(), PosterFragment.class);
+        //startActivity(i);
+        Fragment posterFragment = new Fragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, posterFragment).commit();
+
+    }
+
+
 }

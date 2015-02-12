@@ -26,7 +26,10 @@
             android:id="@+id/btnfriends"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:onClick="GoFriendsPage"
+            android:nestedScrollingEnabled="false" />
 
         <Button
             android:layout_width="wrap_content"
@@ -94,9 +97,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView2"
-                android:src="@drawable/heart_like_2"
+                android:src="@drawable/heart_like_3"
                 android:layout_gravity="top"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp" />
 
             <TextView
@@ -164,9 +167,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView6"
-                android:src="@drawable/heart_like_2"
+                android:src="@drawable/heart_like_3"
                 android:layout_gravity="top"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp" />
 
             <TextView
