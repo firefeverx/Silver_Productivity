@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import android.widget.EditText;
 
 
@@ -18,6 +20,16 @@ public class SubActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+
+        Button buttonFriend = (Button) findViewById(R.id.btnfriends);
+        buttonFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment posterFragment = new Fragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.activity_sub, posterFragment).commit();
+            }
+        });
     }
 
 
@@ -47,11 +59,12 @@ public class SubActivity extends ActionBarActivity {
     {
         //Intent i = new Intent(getApplicationContext(), PosterFragment.class);
         //startActivity(i);
-        Fragment posterFragment = new Fragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, posterFragment).commit();
+//        Fragment posterFragment = new Fragment();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.container, posterFragment).commit();
 
     }
+
 
 
 }

@@ -81,4 +81,5 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
 
         ImageView numberLikeImage = (ImageView) v.findViewById(R.id.number_like_image);
     }
+
 }
