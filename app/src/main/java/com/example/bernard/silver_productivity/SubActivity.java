@@ -49,7 +49,7 @@ public class SubActivity extends ActionBarActivity {
         //startActivity(i);
         Fragment posterFragment = new Fragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, posterFragment).commit();
+        fragmentTransaction.replace(R.id.activity_sub, posterFragment).commit();
 
     }
 
