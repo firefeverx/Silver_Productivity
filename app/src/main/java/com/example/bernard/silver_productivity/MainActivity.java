@@ -55,8 +55,8 @@ public class MainActivity extends ActionBarActivity {
     {
         int phoneNum = 0;
         boolean NumDigitsStatus;
+        //Intent i = new Intent(getApplicationContext(), SubActivity.class);
         Intent i = new Intent(getApplicationContext(), SubActivity.class);
-
 
         //System.out.println("hihi");
 
@@ -68,6 +68,7 @@ public class MainActivity extends ActionBarActivity {
             System.out.println("Phone Num status" + NumDigitsStatus);
             if(NumDigitsStatus == true)
             {
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 
             }
@@ -85,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
     {
         AlertDialog alert = new AlertDialog.Builder(this).create();
 
-        if(phoneNum >= 90000000 && phoneNum <= 99999999)
+        if(phoneNum >= 80000000 && phoneNum <= 99999999)
         {
             return true;
         }
