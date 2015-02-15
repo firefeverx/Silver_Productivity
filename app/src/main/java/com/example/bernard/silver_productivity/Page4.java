@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -75,8 +77,9 @@ public class Page4 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.fragment_page4, container, false);
-        configButton (rootView);
         configInputText (rootView);
+        configButton (rootView);
+
 
 
         return rootView;
@@ -96,18 +99,19 @@ public class Page4 extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getFragmentManager().popBackStack();
             }
         });
 
         /*
-        Submmit Button
+        Submit Button
          */
         Button submitButton = (Button) rootView.findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String contentInput = inputText.getText().toString();
+                Toast.makeText(MainActivity.activity, "Submit: " + contentInput, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -130,7 +134,7 @@ public class Page4 extends Fragment {
         /*
         Input text
          */
-        EditText inputText = (EditText) rootView.findViewById(R.id.content_input);
+        inputText = (EditText) rootView.findViewById(R.id.content_input);
         inputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
