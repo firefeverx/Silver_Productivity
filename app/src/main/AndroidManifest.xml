@@ -20,6 +20,10 @@
             android:name=".SubActivity"
             android:label="@string/title_activity_sub" >
         </activity>
+        <activity
+            android:name=".entity.testing"
+            android:label="@string/title_activity_testing" >
+        </activity>
     </application>
 
 </manifest>

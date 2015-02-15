@@ -10,10 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class SubActivity extends ActionBarActivity {
@@ -28,6 +35,49 @@ public class SubActivity extends ActionBarActivity {
                     .commit();
         }
 
+//        try {
+//            ListOutPost();
+//        }catch (Exception ex)
+//        {
+//            System.out.println(ex.getMessage());
+//        }
+
+        try {
+
+        String[] strPosts = new String[]{"1sdfsdf", "2.dfsdfsdf"};
+
+        ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strPosts);
+
+        ListView ListPost = (ListView) findViewById(R.id.listPost);
+
+        ListPost.setAdapter(adapter);
+
+        ListPost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                String listPostPicked = "you picked " + String.valueOf(adapterView.getItemAtPosition(position));
+
+                Toast.makeText(SubActivity.this, listPostPicked, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        }catch (Exception ex)
+        {
+
+        }
+
+//        theListPost.setOnClickListener(new AdapterView.OnItemClickListener() {
+//
+//        }
+//
+//        @Override
+//        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//
+//            String listPostPicked = "you picked " + String.valueOf(adapterView.getItemAtPosition(position));
+//
+//            Toast.makeText(SubActivity.this, listPostPicked, Toast.LENGTH_SHORT).show();
+//        }
+//    });
 
     }
 
@@ -83,9 +133,9 @@ public class SubActivity extends ActionBarActivity {
             return rootView;
         }
     }
+}
 
-    public void GoFriendsPage(View v)
-    {
+    //public void GoFriendsPage(View v) {
         //Intent i = new Intent(getApplicationContext(), PosterFragment.class);
         //startActivity(i);
 
@@ -98,8 +148,14 @@ public class SubActivity extends ActionBarActivity {
 //        fragmentTransaction.replace(R.id.activity_sub, posterFragment).commit();
 //>>>>>>> origin/master
 
-    }
+    //}
+
+//    public void ListOutPost() {
+//
+//
+//
+//}
 
 
 
-}
+
