@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by LEBAO_000 on 12/02/2015.
  */
-public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
+public class PosterFragmentAdapter extends ArrayAdapter<Comment> {
 
     private static PosterFragmentAdapter instance = null;
     private ArrayList<Comment> comments = new ArrayList<Comment>();
@@ -98,4 +98,11 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
     public int getCount() {
         return comments.size();
     }
+
+    @Override
+    public Comment getItem(int position) {
+        return comments.get(position);
+    }
+
+
 }
