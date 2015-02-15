@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:id = "@+id/fragment_poster">
 
     <!-- TOP PART-->
     <RelativeLayout
@@ -20,11 +21,12 @@
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Location of the poster"
             android:id="@+id/location_poster"
+            android:layout_toRightOf="@id/back_button"
             android:layout_centerHorizontal="true" />
 
         <ImageView
@@ -56,17 +58,17 @@
                 android:layout_width="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_height="wrap_content"
-                android:id= "@+id/number_like">
+                android:id= "@+id/number_like_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/text_number_like"
                     android:text = "12"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"/>
                 <ImageView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src  ="@drawable/ic_launcher"
                     android:layout_below="@+id/text_number_like"
@@ -79,7 +81,7 @@
                 android:id = "@+id/content_poster"
                 android:text = "This is sample content of poster"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/number_like">
+                android:layout_toRightOf="@+id/number_like_layout">
 
             </TextView>
         </RelativeLayout>
@@ -101,43 +103,50 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/location_text"
+                android:layout_toRightOf="@+id/location_text"
                 android:id = "@+id/submit_time_text"
-                android:text="Location"/>
+                android:text="time of submit"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-
                 android:id = "@+id/num_answer"
-                android:text="Location"/>
+                android:text="number of answer"/>
         </RelativeLayout>
 
 
     </RelativeLayout>
 
     <!-- CONTENT OF ANSWER -->
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/list_answer"
-        android:layout_below="@id/content_poster_layout">
-     </ListView>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_below="@id/content_poster_layout"
+        android:id = "@+id/content_answer_layout"
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/list_answer">
+
+         </ListView>
+     </RelativeLayout>
 
 
     <!-- BOTTOM PART -->
+
+
     <RelativeLayout
         android:id = "@+id/below_part"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/content_poster_layout"
+        android:layout_below="@id/content_answer_layout"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
 
         <EditText
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Say something kind..."

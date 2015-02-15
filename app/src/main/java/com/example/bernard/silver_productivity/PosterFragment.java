@@ -2,6 +2,8 @@ package com.example.bernard.silver_productivity;
 
 import android.app.Activity;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,11 +12,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.bernard.silver_productivity.entity.Comment;
+import com.example.bernard.silver_productivity.entity.Poster;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -90,6 +101,43 @@ public class PosterFragment extends Fragment {
     private void createAnswerLayout(View rootView) {
         ListView listAnswers = (ListView)rootView.findViewById(R.id.list_answer);
 
+        ArrayList<Comment> comments = new ArrayList<Comment>();
+
+        RelativeLayout contentAnswerLayout = (RelativeLayout) rootView.findViewById(R.id.content_answer_layout);
+        contentAnswerLayout.getLayoutParams().height = MainActivity.screenHeight/2;
+
+        //Toast.makeText(getActivity(), "ANSWER", Toast.LENGTH_LONG).show();
+        Comment comment1 = new Comment();
+        comment1.setContent("Content of comment 1");
+        comment1.setNumberOfLike(1);
+        comment1.setSubmitTime("Time 1");
+        comments.add(comment1);
+
+
+        Comment comment2 = new Comment();
+        comment2.setContent("Content of comment 2");
+        comment2.setNumberOfLike(2);
+        comment2.setSubmitTime("Time 2");
+        comments.add(comment2);
+
+        Comment comment3 = new Comment();
+        comment3.setContent("Content of comment 3");
+        comment3.setNumberOfLike(3);
+        comment3.setSubmitTime("Time 3");
+        comments.add(comment3);
+
+        Toast.makeText(getActivity(), String.valueOf(comments.size()), Toast.LENGTH_LONG).show();
+        PosterFragmentAdapter adapter = new PosterFragmentAdapter(getActivity(),R.layout.fragment_poster,comments);
+        listAnswers.setAdapter(adapter);
+
+
+        listAnswers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
     }
 
     /**
@@ -102,6 +150,61 @@ public class PosterFragment extends Fragment {
      */
     private void createPostContentLayout(View rootView) {
 
+        RelativeLayout postContentLayout = (RelativeLayout) rootView.findViewById(R.id.content_poster_layout);
+
+        /*
+        Set height of layout
+         */
+        postContentLayout.getLayoutParams().height = MainActivity.screenHeight/5;
+
+        /*
+        Create sample Poster
+         */
+        Poster poster = new Poster();
+        poster.setNumberOfLike(14);
+        poster.setContent("Sample Content of poster");
+        poster.setAuthor("Sample Author of poster");
+        poster.setNumberOfComment(3);
+        poster.setTitle("Sample title of poster");
+        poster.setLocation ("Sample Location of poster");
+        poster.setTime ("14/2/2015");
+
+        /*
+        Number of Like layout
+         */
+        RelativeLayout numberLikeLayout = (RelativeLayout) rootView.findViewById(R.id.number_like_layout);
+        numberLikeLayout.getLayoutParams().width = MainActivity.screenWidth/5;
+        //Number of like
+        TextView numberOfLike  = (TextView) rootView.findViewById(R.id.text_number_like);
+        numberOfLike.setText(String.valueOf(poster.getNumberOfLike()));
+
+        /*
+        Content of poster layout
+         */
+
+        //numberLikeLayout.getLayoutParams().width = MainActivity.screenWidth/5;
+        //Content
+        TextView content = (TextView) rootView.findViewById(R.id.content_poster);
+
+        content.setText(poster.getContent());
+
+        //Location
+        TextView location = (TextView) rootView.findViewById(R.id.location_poster);
+       // location.getLayoutParams().width = MainActivity.screenWidth/3;
+        location.setText(poster.getLocation());
+
+        //Time of submit
+        TextView submitTime = (TextView) rootView.findViewById(R.id.submit_time_text);
+        submitTime.getLayoutParams().width  = MainActivity.screenWidth/3;
+        submitTime.setText(poster.getTime());
+
+        //Number of answer
+        TextView numberAnswer = (TextView) rootView.findViewById(R.id.num_answer);
+        numberAnswer.getLayoutParams().width  = MainActivity.screenWidth/3;
+        numberAnswer.setText(String.valueOf(poster.getNumberOfComment()));
+
+
+
     }
 
     /**
@@ -110,17 +213,19 @@ public class PosterFragment extends Fragment {
      * 2. Post Button
      * @param rootView
      */
+
     private void createBottomLayout(View rootView) {
         /*
         Comment Field
          */
         final EditText commentField = (EditText) rootView.findViewById(R.id.comment_poster);
-
+        commentField.getLayoutParams().width = MainActivity.screenWidth/5*4;
 
         /*
         Post button
          */
         Button postButton = (Button) rootView.findViewById(R.id.submit_poster);
+
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +284,7 @@ public class PosterFragment extends Fragment {
                 Go to Response Fragment
                  */
                 Page4 responseFragment = new Page4();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("page4");
                 fragmentTransaction.replace(R.id.container, responseFragment).commit();
             }
         });

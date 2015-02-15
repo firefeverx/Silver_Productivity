@@ -13,8 +13,11 @@ public class Poster {
     private int numberOfComment;
     private String author;
     ArrayList<Comment> comments;
+    private String location;
+    private String time;
 
-    Poster(){
+
+    public Poster(){
 
     }
 
@@ -67,4 +70,19 @@ public class Poster {
     }
 
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
+    }
 }

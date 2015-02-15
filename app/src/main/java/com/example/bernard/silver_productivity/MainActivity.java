@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,15 +19,29 @@ import com.example.bernard.silver_productivity.entity.testing;
 
 public class MainActivity extends ActionBarActivity {
 
+    /**
+     * Screen's Size
+     */
+    public static int screenHeight;
+    public static int screenWidth;
+    public static MainActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.container_layout);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        /*
+		 * get Screen size
+		 */
+        getScreesize();
+
     }
 
 
@@ -126,5 +141,16 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.activity_main, container, false);
             return rootView;
         }
+    }
+
+    /**
+     * get screen's size;
+     */
+    private void getScreesize() {
+        // Get the width and length of the screen
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
     }
 }

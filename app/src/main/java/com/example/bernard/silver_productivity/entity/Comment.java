@@ -9,9 +9,26 @@ public class Comment {
     private String content;
     private ImageView portraitImage;
     private int numberOfLike;
+    private String submitTime;
 
-    Comment(){
+    public Comment(){
 
+    }
+
+    public void setImageView (ImageView img){
+        this.portraitImage = img;
+    }
+
+    public ImageView getImageView(){
+        return portraitImage;
+    }
+
+    public void setSubmitTime(String submitTime) {
+        this.submitTime = submitTime;
+    }
+
+    public String getSubmitTime() {
+        return submitTime;
     }
 
     public void setContent(String content) {

@@ -2,13 +2,17 @@ package com.example.bernard.silver_productivity;
 
 import android.content.Context;
 import android.test.RenamingDelegatingContext;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.bernard.silver_productivity.entity.Comment;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import org.w3c.dom.Text;
@@ -22,11 +26,12 @@ import java.util.ArrayList;
 public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
 
     private static PosterFragmentAdapter instance = null;
-    private ArrayList<Poster> posters = new ArrayList<Poster>();
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
+    private Comment comment;
 
-    public PosterFragmentAdapter(Context context, int resource, ArrayList<Poster> posters){
+    public PosterFragmentAdapter(Context context, int resource, ArrayList<Comment> comments){
         super (context, resource);
-        this.posters = posters;
+        this.comments = comments;
     }
 
     @Override
@@ -38,7 +43,8 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
             v = inflater.inflate(R.layout.single_answer_layout, parent, false);
         }
 
-
+        comment = comments.get(position);
+       // Toast.makeText(MainActivity.activity, "ADAPTER", Toast.LENGTH_LONG).show();
         setLayoutInformation(v);
         return v;
     }
@@ -48,6 +54,11 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
      * @param v
      */
     private void setLayoutInformation(View v){
+
+        int height;
+        RelativeLayout commentLayout = (RelativeLayout) v.findViewById(R.id.single_answer_layout);
+        commentLayout.getLayoutParams().height = MainActivity.screenHeight/5;
+
         setHeadPortrait(v);
         setAnswerLayout(v);
     }
@@ -66,18 +77,25 @@ public class PosterFragmentAdapter extends ArrayAdapter<Poster> {
         Content of answer
          */
         TextView contentAnswer = (TextView) v.findViewById(R.id.content_answer_text);
+        contentAnswer.setText(comment.getContent());
+       // contentAnswer.setText("Content of Comment");
 
         /*
         Time of submit
          */
-        TextView submitTime = (TextView) v.findViewById(R.id.submit_time_text);
+        TextView submitTime = (TextView) v.findViewById(R.id.answer_time_submit);
+        submitTime.setText(comment.getSubmitTime());
 
         /*
         Number of Like
          */
         TextView numberLikeText = (TextView) v.findViewById(R.id.number_like_number);
-
+        numberLikeText.setText(String.valueOf(comment.getNumberOfLike()));
         ImageView numberLikeImage = (ImageView) v.findViewById(R.id.number_like_image);
     }
 
+    @Override
+    public int getCount() {
+        return comments.size();
+    }
 }

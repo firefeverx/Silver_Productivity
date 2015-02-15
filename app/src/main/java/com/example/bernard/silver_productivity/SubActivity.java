@@ -118,12 +118,14 @@ public class SubActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.activity_sub, container, false);
 
+            /*
+            Config Friend Button
+             */
             Button buttonFriend = (Button) rootView.findViewById(R.id.btnfriends);
             buttonFriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            "CLICKED", Toast.LENGTH_LONG).show();
+
                     Fragment posterFragment = new PosterFragment();
                     FragmentTransaction fragmentTransaction = getActivity()
                             .getSupportFragmentManager().beginTransaction();
