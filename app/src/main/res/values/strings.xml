@@ -8,5 +8,6 @@
     <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="title_activity_sub">SubActivity</string>
     <string name="title_activity_testing">testing</string>
+    <string name="title_activity_list_posters">ListPosters</string>
 
 </resources>

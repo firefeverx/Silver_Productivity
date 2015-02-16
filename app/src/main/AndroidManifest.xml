@@ -21,8 +21,12 @@
             android:label="@string/title_activity_sub" >
         </activity>
         <activity
-            android:name=".entity.testing"
+            android:name=".testing"
             android:label="@string/title_activity_testing" >
+        </activity>
+        <activity
+            android:name=".ListPosters"
+            android:label="@string/title_activity_list_posters" >
         </activity>
     </application>
 

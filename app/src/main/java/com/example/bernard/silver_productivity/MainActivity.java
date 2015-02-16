@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.app.AlertDialog;
 
-import com.example.bernard.silver_productivity.entity.testing;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -72,7 +70,7 @@ public class MainActivity extends ActionBarActivity {
         int phoneNum = 0;
         boolean NumDigitsStatus;
         //Intent i = new Intent(getApplicationContext(), SubActivity.class);
-        Intent i = new Intent(getApplicationContext(), testing.class);
+        Intent i = new Intent(getApplicationContext(), ListPosters.class);
 
         //System.out.println("hihi");
 
