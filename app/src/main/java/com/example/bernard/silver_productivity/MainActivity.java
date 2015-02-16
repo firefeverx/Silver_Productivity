@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity {
         int phoneNum = 0;
         boolean NumDigitsStatus;
         //Intent i = new Intent(getApplicationContext(), SubActivity.class);
-        Intent i = new Intent(getApplicationContext(), ListPosters.class);
+        //Intent i = new Intent(getApplicationContext(), listPosters.class);
 
         //System.out.println("hihi");
 
