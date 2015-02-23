@@ -28,6 +28,10 @@
             android:name=".ListPosters"
             android:label="@string/title_activity_list_posters" >
         </activity>
+        <activity
+            android:name=".listPoster"
+            android:label="@string/title_activity_list_poster" >
+        </activity>
     </application>
 
 </manifest>
