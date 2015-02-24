@@ -57,7 +57,7 @@
                 <ImageView
                     android:id = "@+id/number_like_image"
                     android:layout_toRightOf="@+id/number_like_number"
-                    android:src  = "@drawable/ic_launcher"
+                    android:src  = "@android:drawable/btn_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

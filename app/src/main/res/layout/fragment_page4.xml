@@ -31,6 +31,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/button_field"
+
         android:text="Start content key in"
         android:id = "@+id/content_input"/>
 
