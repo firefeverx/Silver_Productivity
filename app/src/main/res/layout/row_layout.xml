@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnComment"
-                android:src="@drawable/speech_bubble_117740_3"
+                android:src="@drawable/ic_launcher"
                 android:layout_gravity="left"
                 android:layout_marginLeft="100dp"
                 android:background="#00000000" />
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnLike"
-                android:src="@drawable/heart_like_4"
+                android:src="@drawable/ic_launcher"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dp"
                 android:background="#00000000" />
