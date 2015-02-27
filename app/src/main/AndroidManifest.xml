@@ -17,10 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubActivity"
-            android:label="@string/title_activity_sub" >
-        </activity>
-        <activity
             android:name=".testing"
             android:label="@string/title_activity_testing" >
         </activity>
