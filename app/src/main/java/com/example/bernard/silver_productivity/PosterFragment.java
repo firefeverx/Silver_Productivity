@@ -185,11 +185,11 @@ public class PosterFragment extends Fragment {
         //numberLikeLayout.getLayoutParams().width = MainActivity.screenWidth/5;
         //Content
         TextView content = (TextView) rootView.findViewById(R.id.content_poster);
-
         content.setText(poster.getContent());
 
         //Location
-        TextView location = (TextView) rootView.findViewById(R.id.location_poster);
+        TextView location = (TextView) rootView.findViewById(R.id.location_text );
+        location.getLayoutParams().width = MainActivity.screenWidth/5;
        // location.getLayoutParams().width = MainActivity.screenWidth/3;
         location.setText(poster.getLocation());
 
@@ -200,7 +200,7 @@ public class PosterFragment extends Fragment {
 
         //Number of answer
         TextView numberAnswer = (TextView) rootView.findViewById(R.id.num_answer);
-        numberAnswer.getLayoutParams().width  = MainActivity.screenWidth/3;
+        numberAnswer.getLayoutParams().width  = MainActivity.screenWidth/5;
         numberAnswer.setText(String.valueOf(poster.getNumberOfComment()));
 
 
