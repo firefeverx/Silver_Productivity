@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
     {
         int phoneNum = 0;
         boolean NumDigitsStatus;
-        Intent i = new Intent(getApplicationContext(), listPoster.class);
+       // Intent i = new Intent(getApplicationContext(), listPoster.class);
         //Intent i = new Intent(getApplicationContext(), listPosters.class);
 
         //System.out.println("hihi");
@@ -80,12 +80,14 @@ public class MainActivity extends ActionBarActivity {
             NumDigitsStatus = CheckNumOfDigits(phoneNum);
 
             //System.out.println("Phone Num status" + NumDigitsStatus);
-            if(NumDigitsStatus == true)
-            {
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-
-            }
+//            if(NumDigitsStatus == true)
+//            {
+                Fragment listPosterFragment = new listPoster();
+                    getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, listPosterFragment)
+                    .commit();
+//
+//            }
         }
         catch (Exception ex)
         {
