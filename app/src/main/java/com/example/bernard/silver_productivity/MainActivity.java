@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
             phoneNum = Integer.parseInt(eTextPhoneNum.getText().toString());
             NumDigitsStatus = CheckNumOfDigits(phoneNum);
 
-            System.out.println("Phone Num status" + NumDigitsStatus);
+            //System.out.println("Phone Num status" + NumDigitsStatus);
             if(NumDigitsStatus == true)
             {
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
