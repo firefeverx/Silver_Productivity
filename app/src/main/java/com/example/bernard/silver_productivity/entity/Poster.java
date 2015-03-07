@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Poster {
 
+    private String id;
     private String title;
     private String content;
     private int numberOfLike;
@@ -19,6 +20,20 @@ public class Poster {
 
     public Poster(){
 
+    }
+
+    public Poster(String title, String location, int numberOfComment, int numberOfLike){
+        this.title = title;
+        this.location = location;
+        this.numberOfComment = numberOfComment;
+        this.numberOfLike = numberOfLike;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setAuthor(String author) {

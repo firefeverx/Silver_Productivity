@@ -12,6 +12,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.bernard.silver_productivity.entity.Poster;
+
+import java.util.ArrayList;
+
 
 public class listPoster extends Fragment {
 
@@ -30,31 +34,41 @@ public class listPoster extends Fragment {
         //to here.
 
         //try {
-
+        ArrayList<Poster> posters = new ArrayList<Poster>();
+            Poster poster1 = new Poster("How to cope stress?", "Singapore", 5,8);
+            Poster poster2 = new Poster("How to communicate with elderly?", "Malaysia", 4,1);
+            Poster poster3 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            posters.add(poster1);
+            posters.add(poster2);
+            posters.add(poster3);
             String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
             String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
 
 //            ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strPosts);
 //           ListAdapter adapterSec = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.txtLocation, strLocation);
 
-            ListAdapter adapter = new MyAdapter(getActivity(), strPosts);
+            ListAdapter adapter = new MyAdapter(getActivity(), posters);
 
 
             //ListAdapter adapterSec = new MyAdapter(this, strLocation);
 
-            ListView ListPost = (ListView) rootView.findViewById(R.id.listItemPosts);
+            final ListView ListPost = (ListView) rootView.findViewById(R.id.listItemPosts);
 
 
             ListPost.setAdapter(adapter);
-
+            ListPost.setClickable(true);
 //            ListPost.setAdapter(adapterSec);
-
+            ListPost.setFocusable(false);
             ListPost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    String listPostPicked = "you picked " + String.valueOf(adapterView.getItemAtPosition(position));
+                    Toast.makeText(getActivity(),"CLICKED",Toast.LENGTH_LONG).show();
+                    //String listPostPicked = "you picked " + String.valueOf(ListPost.getItemAtPosition(position));
+                    PosterFragment posterFragment = new PosterFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                               .replace(R.id.container,posterFragment).commit();
+                    //Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_SHORT).show();
                 }
             });
 
