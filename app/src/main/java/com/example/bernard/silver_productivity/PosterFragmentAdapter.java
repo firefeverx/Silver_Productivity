@@ -68,7 +68,7 @@ public class PosterFragmentAdapter extends ArrayAdapter<Comment> {
      */
     private void setHeadPortrait(View v){
         ImageView headPortraitImage = (ImageView) v.findViewById(R.id.head_portrait_answer);
-
+        headPortraitImage.setImageResource(R.drawable.header_image);
 
     }
 
