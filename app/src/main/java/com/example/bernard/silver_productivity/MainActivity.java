@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.container_layout);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .replace(R.id.container, new PlaceholderFragment())
                     .commit();
         }
 
