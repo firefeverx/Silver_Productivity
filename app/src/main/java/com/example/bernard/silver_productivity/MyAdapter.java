@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bernard.silver_productivity.R;
+import com.example.bernard.silver_productivity.entity.Comment;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import java.util.ArrayList;
@@ -20,14 +22,12 @@ class MyAdapter extends ArrayAdapter<Poster> {
     private String[] strLikes = new String[]{"8", "1", "5"};
     ArrayList<Poster> posters = new ArrayList<Poster>();
 
-
-    public MyAdapter(Context context, ArrayList<Poster> posters) {
-        super(context, R.layout.row_layout);
+    public MyAdapter(Context context, int resource, ArrayList<Poster> posters){
+        super (context, resource);
         this.posters = posters;
-        System.out.println (getCount());
-
-
     }
+
+
 
 
     @Override
@@ -43,7 +43,15 @@ class MyAdapter extends ArrayAdapter<Poster> {
             theView = inflater.inflate(R.layout.row_layout, parent, false);
         }
 
+        theView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                PosterFragment posterFragment = new PosterFragment();
+                MainActivity.activity.getSupportFragmentManager().beginTransaction().addToBackStack("fragment")
+                        .replace(R.id.container, posterFragment).commit();
+            }
+        });
         Poster poster = getItem(position);
 
         TextView theTextPoster = (TextView) theView.findViewById(R.id.txtPoster);

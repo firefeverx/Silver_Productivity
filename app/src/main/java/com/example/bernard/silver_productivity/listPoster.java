@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -38,43 +41,47 @@ public class listPoster extends Fragment {
             Poster poster1 = new Poster("How to cope stress?", "Singapore", 5,8);
             Poster poster2 = new Poster("How to communicate with elderly?", "Malaysia", 4,1);
             Poster poster3 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster4 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster5 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster6 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster7 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster8 = new Poster("How to do well in studies?", "Singapore", 3,5);
+            Poster poster9 = new Poster("How to do well in studies?", "Singapore", 3,5);
             posters.add(poster1);
             posters.add(poster2);
             posters.add(poster3);
+            posters.add(poster4);
+            posters.add(poster5);
+            posters.add(poster6);
+            posters.add(poster7);
+            posters.add(poster8);
+            posters.add(poster9);
+
             String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
             String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
 
 //            ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strPosts);
 //           ListAdapter adapterSec = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.txtLocation, strLocation);
 
-            ListAdapter adapter = new MyAdapter(getActivity(), posters);
+            //ListAdapter adapter = new MyAdapter(getActivity(), posters);
+            ListView listPosters = (ListView)rootView.findViewById(R.id.list_poster);
+            MyAdapter adapter = new MyAdapter(getActivity(),R.layout.activity_list_poster,posters);
+            listPosters.setAdapter(adapter);
 
 
-            //ListAdapter adapterSec = new MyAdapter(this, strLocation);
-
-            final ListView ListPost = (ListView) rootView.findViewById(R.id.listItemPosts);
-
-
-            ListPost.setAdapter(adapter);
-            ListPost.setClickable(true);
-//            ListPost.setAdapter(adapterSec);
-            ListPost.setFocusable(false);
-            ListPost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    Toast.makeText(getActivity(),"CLICKED",Toast.LENGTH_LONG).show();
-                    //String listPostPicked = "you picked " + String.valueOf(ListPost.getItemAtPosition(position));
-                    PosterFragment posterFragment = new PosterFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                               .replace(R.id.container,posterFragment).commit();
-                    //Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_LONG).show();
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 }
             });
 
-        //} catch (Exception ex) {
-        //    System.out.println(ex.getMessage());
-        //}
+            //ListAdapter adapterSec = new MyAdapter(this, strLocation);
+
+            //ListView ListPost = (ListView) rootView.findViewById(R.id.list_poster);
+
+
+
 
         return rootView;
     }
@@ -102,6 +109,10 @@ public class listPoster extends Fragment {
         super.onDetach();
         //mListener = null;
     }
+
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -126,7 +126,7 @@ public class PosterFragment extends Fragment {
         comment3.setSubmitTime("Time 3");
         comments.add(comment3);
 
-        Toast.makeText(getActivity(), String.valueOf(comments.size()), Toast.LENGTH_LONG).show();
+
         PosterFragmentAdapter adapter = new PosterFragmentAdapter(getActivity(),R.layout.fragment_poster,comments);
         listAnswers.setAdapter(adapter);
 
@@ -134,7 +134,7 @@ public class PosterFragment extends Fragment {
         listAnswers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    Toast.makeText(getActivity(), "CLICKED", Toast.LENGTH_LONG).show();
             }
         });
 
