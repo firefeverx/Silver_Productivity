@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':java-json', ':gson-2.3.1'
