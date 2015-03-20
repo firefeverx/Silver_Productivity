@@ -6,11 +6,14 @@ package com.example.bernard.silver_productivity.entity;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -37,7 +40,17 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class GetAllPoster extends ListActivity {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+
+public class GetAllPoster  {
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -50,6 +63,10 @@ public class GetAllPoster extends ListActivity {
     // url to get all products list
     private static String url_all_products = "http://api.androidhive.info/android_connect/get_all_products.php";
 
+    public static final String WEBSERVICE = "http://10.0.2.2/test";
+
+    private Gson gson = new Gson();
+
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PRODUCTS = "products";
@@ -58,6 +75,75 @@ public class GetAllPoster extends ListActivity {
 
     // products JSONArray
     JSONArray products = null;
+
+    public void retrieveAllPoster() throws IOException
+    {
+        /*
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        // getting JSON string from URL
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet("http://localhost/test/get_poster_details.php?id=1");
+        HttpResponse httpResponse = client.execute(request);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+        String result = "";
+        while ((result = rd.readLine()) != null){
+
+        }
+        try {
+            System.out.println("here" + result);
+            JSONObject jsonObject = new JSONObject(result);
+        } catch (Exception e){
+
+        }
+        */
+
+
+        //private static final String FILENAME = "C:\\Users\\GuoLong\\Desktop\\ver3\\StraightA_app\\data\\User.txt";
+
+
+//        String url = WEBSERVICE +"/?threadID="+threadID;
+        String url = WEBSERVICE +"/?id=1";
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, null, new AsyncHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] header, byte[] content, Throwable throwable) {
+                //printErrorMessage(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] header, byte[] content) {
+                try {
+                    List<Poster> planList = new ArrayList<Poster>();
+                    String response = new String(content, "UTF-8");
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
+                    JsonParser parser = new JsonParser();
+                    JsonArray data = parser.parse(response).getAsJsonArray();
+
+                    Iterator<JsonElement> itr = data.iterator();
+
+                    while (itr.hasNext()) {
+                        JsonElement jsonElement = itr.next();
+                        JsonObject object = jsonElement.getAsJsonObject();
+
+                        Poster plan = gson.fromJson(object.get("poster"), Poster.class);
+                        System.out.println("get " + plan.getContent());
+                        //planList.add(plan);
+                    }
+                    //setChanged();
+                    //notifyObservers(planList);
+
+                }
+                catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+    }
+
+
 
 //    @Override
 //        public void onCreate(Bundle savedInstanceState) {
@@ -113,27 +199,29 @@ public class GetAllPoster extends ListActivity {
 //
 //    }
 
+
     /**
      * Background Async Task to Load all product by making HTTP Request
      * */
-    class LoadAllProducts extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
+/*     class LoadAllProducts extends AsyncTask<String, String, String> {
+
+
+          Before starting background thread Show Progress Dialog
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(AllProductsActivity.this);
-            pDialog.setMessage("Loading products. Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
+            //pDialog = new ProgressDialog(AllProductsActivity.this);
+            //pDialog.setMessage("Loading products. Please wait...");
+            //pDialog.setIndeterminate(false);
+            //pDialog.setCancelable(false);
+            //pDialog.show();
         }
 
-        /**
-         * getting All products from url
-         * */
+
+        // getting All products from url
+
         protected String doInBackground(String args) throws IOException {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -152,7 +240,7 @@ public class GetAllPoster extends ListActivity {
 
             }
 
-
+            /*
             // Check your log cat for JSON reponse
             Log.d("All Products: ", json.toString());
 
@@ -196,21 +284,23 @@ public class GetAllPoster extends ListActivity {
                 e.printStackTrace();
             }
 
+
             return null;
         }
 
         /**
          * After completing background task Dismiss the progress dialog
          * **/
-        protected void onPostExecute(String file_url) {
+         /*
+         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
             // updating UI from Background Thread
             runOnUiThread(new Runnable() {
                 public void run() {
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
+
+                     //Updating parsed JSON data into ListView
+
                     ListAdapter adapter = new SimpleAdapter(
                             AllProductsActivity.this, productsList,
                             R.layout.list_item, new String[] { TAG_PID,
@@ -223,5 +313,5 @@ public class GetAllPoster extends ListActivity {
 
         }
 
-    }
+    }*/
 }

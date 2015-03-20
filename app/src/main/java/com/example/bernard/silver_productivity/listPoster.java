@@ -15,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.bernard.silver_productivity.entity.GetAllPoster;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import java.util.ArrayList;
@@ -56,6 +57,14 @@ public class listPoster extends Fragment {
             posters.add(poster7);
             posters.add(poster8);
             posters.add(poster9);
+
+        GetAllPoster g = new GetAllPoster();
+        try {
+            g.retrieveAllPoster();
+        }catch (Exception e)
+        {
+
+        }
 
             String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
             String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
