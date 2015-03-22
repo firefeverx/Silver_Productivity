@@ -43,6 +43,7 @@ public class listPoster extends Fragment {
             posters.add(poster2);
             posters.add(poster3);
 <<<<<<< HEAD
+<<<<<<< HEAD
             posters.add(poster4);
             posters.add(poster5);
             posters.add(poster6);
@@ -60,6 +61,8 @@ public class listPoster extends Fragment {
 
 =======
 >>>>>>> parent of 92d0611... Poster Item Click
+=======
+>>>>>>> parent of 92d0611... Poster Item Click
             String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
             String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
 
@@ -67,12 +70,20 @@ public class listPoster extends Fragment {
 //           ListAdapter adapterSec = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.txtLocation, strLocation);
 
             ListAdapter adapter = new MyAdapter(getActivity(), posters);
+<<<<<<< HEAD
 
 
             //ListAdapter adapterSec = new MyAdapter(this, strLocation);
 
             final ListView ListPost = (ListView) rootView.findViewById(R.id.listItemPosts);
 
+=======
+
+
+            //ListAdapter adapterSec = new MyAdapter(this, strLocation);
+
+            final ListView ListPost = (ListView) rootView.findViewById(R.id.listItemPosts);
+>>>>>>> parent of 92d0611... Poster Item Click
 
             ListPost.setAdapter(adapter);
             ListPost.setClickable(true);
@@ -88,6 +99,23 @@ public class listPoster extends Fragment {
                                .replace(R.id.container,posterFragment).commit();
                     //Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_LONG).show();
 
+<<<<<<< HEAD
+=======
+            ListPost.setAdapter(adapter);
+            ListPost.setClickable(true);
+//            ListPost.setAdapter(adapterSec);
+            ListPost.setFocusable(false);
+            ListPost.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    Toast.makeText(getActivity(),"CLICKED",Toast.LENGTH_LONG).show();
+                    //String listPostPicked = "you picked " + String.valueOf(ListPost.getItemAtPosition(position));
+                    PosterFragment posterFragment = new PosterFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                               .replace(R.id.container,posterFragment).commit();
+                    //Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_LONG).show();
+
+>>>>>>> parent of 92d0611... Poster Item Click
                 }
             });
 
