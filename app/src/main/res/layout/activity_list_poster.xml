@@ -1,56 +1,54 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.bernard.silver_productivity.listPoster">
 
-    <RelativeLayout
-        android:layout_alignParentTop="true"
-
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/TopLayout">
 
         <ImageButton
-            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnMenu"
-            android:src="@drawable/test_2" />
+            android:src="@drawable/test_2"
+            android:background="#00000000" />
 
         <Button
-            android:layout_toRightOf="@id/btnMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Friends"
             android:id="@+id/btnFriends"
+            android:layout_gravity="left"
+            android:layout_marginLeft="30dp"
             android:clickable="true" />
 
         <Button
-            android:layout_toRightOf="@+id/btnFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Explore"
-            android:id="@+id/btnExplore" />
+            android:id="@+id/btnExplore"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_below="@id/TopLayout"
-        android:id = "@+id/content_poster_layout"
-        android:layout_height="match_parent">
+
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id = "@+id/list_poster">
-
-        </ListView>
-    </RelativeLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/listItemPosts" />
 
 
 
-</RelativeLayout>
+</LinearLayout>
