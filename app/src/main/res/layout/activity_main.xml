@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/TopInnerSection">
 
-                <ImageButton
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/BtnClose"
@@ -39,26 +39,28 @@
 
 
 
-                <ImageButton
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/logo"
                     android:src="@drawable/logo1"
                     android:background="#00000000"
+
                     android:layout_gravity="top|left"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="50dp" />
 
-                <ImageButton
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton"
+                    android:id="@+id/to_page_2"
                     android:src="@drawable/green_arrow2"
                     android:background="#00000000"
+
                     android:layout_gravity="bottom|right"
                     android:layout_marginLeft="50dp"
                     android:layout_marginBottom="30dp"
-                    android:onClick="GoNextPage"
+
                     android:clickable="true" />
                 </LinearLayout>
 
@@ -111,13 +113,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtPhoneNum"
                     android:text="Enter your phone number "
-                    android:textSize="20dp"
-                    android:layout_gravity="top|left"
+                    android:textSize="20sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="30dp"
-                    android:autoText="true"
-                    android:inputType="number|phone"
-                    android:selectAllOnFocus="true" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -127,7 +126,9 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/BtmSection"></LinearLayout>
+            android:id="@+id/BtmSection">
+
+            </LinearLayout>
 
     </LinearLayout>
 

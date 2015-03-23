@@ -1,6 +1,5 @@
 package com.example.bernard.silver_productivity;
 
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.app.AlertDialog;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -32,9 +33,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.container_layout);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .replace(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
 
         /*
 		 * get Screen size
@@ -66,70 +68,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void GoNextPage(View v)
-    {
-        int phoneNum = 0;
-        boolean NumDigitsStatus;
-        Intent i = new Intent(getApplicationContext(), listPoster.class);
-        //Intent i = new Intent(getApplicationContext(), listPosters.class);
 
-        //System.out.println("hihi");
-
-        try {
-            EditText eTextPhoneNum = (EditText) findViewById(R.id.txtPhoneNum);
-            phoneNum = Integer.parseInt(eTextPhoneNum.getText().toString());
-            NumDigitsStatus = CheckNumOfDigits(phoneNum);
-
-            //System.out.println("Phone Num status" + NumDigitsStatus);
-            if(NumDigitsStatus == true)
-            {
-                Fragment listPosterFragment = new listPoster();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, listPosterFragment)
-                        .commit();
-                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                //startActivity(i);
-
-            }
-        }
-        catch (Exception ex)
-        {
-            System.out.println(ex.toString());
-
-        }
-
-
-    }
-
-    private boolean CheckNumOfDigits(int phoneNum)
-    {
-        AlertDialog alert = new AlertDialog.Builder(this).create();
-
-        if(phoneNum >= 80000000 && phoneNum <= 99999999)
-        {
-            return true;
-        }
-        else
-        {
-
-            alert.setTitle("Error");
-            alert.setMessage("Please enter your 8 digits phone number.");
-            alert.setButton("OK", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-
-
-                }
-
-            });
-            //alert.setIcon(R.drawable.icon);
-            alert.show();
-        }
-
-
-        return false;
-    }
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -138,11 +77,88 @@ public class MainActivity extends ActionBarActivity {
         public PlaceholderFragment() {
         }
 
+        View rootView = null;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_main, container, false);
+            if (rootView == null) {
+                rootView = inflater.inflate(R.layout.activity_main, container, false);
+            }
+            configButton(rootView);
             return rootView;
+        }
+
+        private void configButton(View rootView) {
+            ImageView nextPageButton = (ImageView) rootView.findViewById(R.id.to_page_2);
+            nextPageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goNextPage(v);
+                }
+            });
+        }
+
+        public void goNextPage(View v)
+        {
+            int phoneNum = 0;
+            boolean NumDigitsStatus;
+            // Intent i = new Intent(getApplicationContext(), listPoster.class);
+            //Intent i = new Intent(getApplicationContext(), listPosters.class);
+
+            //System.out.println("hihi");
+
+
+            EditText eTextPhoneNum = (EditText) rootView.findViewById(R.id.txtPhoneNum);
+            try {
+                phoneNum = Integer.parseInt(eTextPhoneNum.getText().toString().trim());
+
+                NumDigitsStatus = CheckNumOfDigits(phoneNum);
+            }catch (Exception e){
+                Toast.makeText(getActivity(), "Wrong format", Toast.LENGTH_LONG).show();
+            }
+
+            //System.out.println("Phone Num status" + NumDigitsStatus);
+//            if(NumDigitsStatus == true)
+//            {
+            Fragment listPosterFragment = new listPoster();
+            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("page2")
+                    .replace(R.id.container, listPosterFragment)
+                    .commit();
+//
+//            }
+
+
+
+        }
+
+        private boolean CheckNumOfDigits(int phoneNum)
+        {
+            AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
+
+            if(phoneNum >= 80000000 && phoneNum <= 99999999)
+            {
+                return true;
+            }
+            else
+            {
+
+                alert.setTitle("Error");
+                alert.setMessage("Please enter your 8 digits phone number.");
+                alert.setButton("OK", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+
+                    }
+
+                });
+                //alert.setIcon(R.drawable.icon);
+                alert.show();
+            }
+
+
+            return false;
         }
     }
 

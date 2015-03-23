@@ -6,28 +6,22 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:name="com.volley.api.AppController"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".testing"
-            android:label="@string/title_activity_testing" >
-        </activity>
-        <activity
-            android:name=".ListPosters"
-            android:label="@string/title_activity_list_posters" >
-        </activity>
-        <activity
-            android:name=".listPoster"
-            android:label="@string/title_activity_list_poster" >
-        </activity>
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
