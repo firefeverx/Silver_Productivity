@@ -1,5 +1,6 @@
 package com.example.bernard.silver_productivity;
 
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -82,8 +83,12 @@ public class MainActivity extends ActionBarActivity {
             //System.out.println("Phone Num status" + NumDigitsStatus);
             if(NumDigitsStatus == true)
             {
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+                Fragment listPosterFragment = new listPoster();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, listPosterFragment)
+                        .commit();
+                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //startActivity(i);
 
             }
         }
