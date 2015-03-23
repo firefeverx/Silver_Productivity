@@ -88,14 +88,13 @@
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="androidasync-2.0.5" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="jsoup-1.7.3" level="project" />
-    <orderEntry type="library" exported="" name="gson-2.3" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-java-5.0.8-bin" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-java-5.0.8" level="project" />
     <orderEntry type="library" exported="" name="volley" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.6" level="project" />
-    <orderEntry type="library" exported="" name="java-json" level="project" />
   </component>
 </module>
 
