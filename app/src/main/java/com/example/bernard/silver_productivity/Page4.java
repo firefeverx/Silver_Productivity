@@ -140,7 +140,7 @@ public class Page4 extends Fragment {
         InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         inputText = (EditText) rootView.findViewById(R.id.content_input);
-        inputText.requestFocus();
+        inputText.requestFocus();   
         inputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
