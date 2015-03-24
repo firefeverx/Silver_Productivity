@@ -103,42 +103,57 @@ public class GetAllPoster  {
 
 //        String url = WEBSERVICE +"/?threadID="+threadID;
         String url = WEBSERVICE +"/?id=1";
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] header, byte[] content, Throwable throwable) {
-                //printErrorMessage(statusCode);
-            }
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.get(url, null, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onFailure(int statusCode, Header[] header, byte[] content, Throwable throwable) {
+//                //printErrorMessage(statusCode);
+//            }
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] header, byte[] content) {
+//                try {
+//                    List<Poster> planList = new ArrayList<Poster>();
+//                    String response = new String(content, "UTF-8");
+//                    GsonBuilder gsonBuilder = new GsonBuilder();
+//                    Gson gson = gsonBuilder.create();
+//                    JsonParser parser = new JsonParser();
+//                    JsonArray data = parser.parse(response).getAsJsonArray();
+//
+//                    Iterator<JsonElement> itr = data.iterator();
+//
+//                    while (itr.hasNext()) {
+//                        JsonElement jsonElement = itr.next();
+//                        JsonObject object = jsonElement.getAsJsonObject();
+//
+//                        Poster plan = gson.fromJson(object.get("poster"), Poster.class);
+//                        System.out.println("get " + plan.getContent());
+//                        //planList.add(plan);
+//                    }
+//                    //setChanged();
+//                    //notifyObservers(planList);
+//
+//                }
+//                catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
-            @Override
-            public void onSuccess(int statusCode, Header[] header, byte[] content) {
-                try {
-                    List<Poster> planList = new ArrayList<Poster>();
-                    String response = new String(content, "UTF-8");
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    Gson gson = gsonBuilder.create();
-                    JsonParser parser = new JsonParser();
-                    JsonArray data = parser.parse(response).getAsJsonArray();
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet("http://10.0.2.2/test/get_poster_details.php?id=1");
+        HttpResponse httpResponse = client.execute(request);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+        String result = "";
+        while ((result = rd.readLine()) != null){
+            System.out.println(result);
+        }
+        try {
+            JSONObject jsonObject = new JSONObject("stop " + result);
+        } catch (Exception e){
 
-                    Iterator<JsonElement> itr = data.iterator();
+        }
 
-                    while (itr.hasNext()) {
-                        JsonElement jsonElement = itr.next();
-                        JsonObject object = jsonElement.getAsJsonObject();
-
-                        Poster plan = gson.fromJson(object.get("poster"), Poster.class);
-                        System.out.println("get " + plan.getContent());
-                        //planList.add(plan);
-                    }
-                    //setChanged();
-                    //notifyObservers(planList);
-
-                }
-                catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
 
     }

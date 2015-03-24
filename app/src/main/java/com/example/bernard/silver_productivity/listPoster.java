@@ -19,12 +19,16 @@ import com.example.bernard.silver_productivity.entity.DatabaseHandler;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class listPoster extends Fragment {
 
 
     //public static listPoster activity;
+    private static boolean refreshstatus = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,9 +71,19 @@ public class listPoster extends Fragment {
         //ListAdapter adapter = new MyAdapter(getActivity(), posters);
         ListView listPosters = (ListView)rootView.findViewById(R.id.listItemPosts);
 //        MyAdapter adapter = new MyAdapter(getActivity(),R.layout.activity_list_poster, posters);
+
+        if(refreshstatus == false) {
+            DatabaseHandler db = new DatabaseHandler();
+            //List<Poster> tmp = db.getForumPostByThread(1);
+            db.getForumPostByThread(1);
+            refreshstatus = true;
+        }
+        //System.out.print("tmp " + tmp.get(0).getAuthor());
         MyAdapter adapter = new MyAdapter(getActivity(), posters);
-        DatabaseHandler db = new DatabaseHandler();
-        db.getForumPostByThread(1);
+
+
+
+
         listPosters.setAdapter(adapter);
 
 

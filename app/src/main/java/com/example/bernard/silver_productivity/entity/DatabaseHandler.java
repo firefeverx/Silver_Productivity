@@ -37,6 +37,7 @@ public class DatabaseHandler  {
 
     public static final String WEBSERVICE = "http://10.0.2.2/Silver";
     private static final String FILENAME = "C:\\Users\\GuoLong\\Desktop\\ver3\\StraightA_app\\data\\User.txt";
+    private static List<Poster> tmpposterList  = new ArrayList<Poster>();
     private Gson gson = new Gson();
 
     public DatabaseHandler() {
@@ -63,6 +64,7 @@ public class DatabaseHandler  {
         System.out.println("1 getforum");
         String url = WEBSERVICE +"/get_poster_details.php?id="+threadID;
         AsyncHttpClient client = new AsyncHttpClient();
+
         client.get(url, null, new AsyncHttpResponseHandler() {
 
             @Override
@@ -82,21 +84,24 @@ public class DatabaseHandler  {
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
                     JsonParser parser = new JsonParser();
-                    //System.out.println("here " + response);
+                    System.out.println("here " + response);
                     JsonArray data = parser.parse(response).getAsJsonArray();
 
 
                     Iterator<JsonElement> itr = data.iterator();
 
-                    while (itr.hasNext()) {
-                        //JsonElement jsonElement = itr.next();
-                        //JsonObject object = jsonElement.getAsJsonObject();
-                        //Poster poster = gson.fromJson(object.get("ForumPost"), Poster.class);
-                        //posterList.add(poster);
+                    //while (itr.hasNext()) {
+                        JsonElement jsonElement = itr.next();
+                        JsonObject object = jsonElement.getAsJsonObject();
+                        Poster poster = gson.fromJson(object.get("poster"), Poster.class);
+                        posterList.add(poster);
                         System.out.println("get " + itr.next().toString());
-                    }
+                    //}
+
+                    //tmpposterList = posterList;
                     //setChanged();
                     //notifyObservers(planList);
+
 
                 }
                 catch (UnsupportedEncodingException e) {
@@ -110,7 +115,7 @@ public class DatabaseHandler  {
 //        List<ForumPost> result = new ArrayList<ForumPost>();
 //        ForumDAO forumDAO = new ForumDAO();
 //        result = forumDAO.getPost(threadID);
-
+            //return tmpposterList;
     }
 
 
