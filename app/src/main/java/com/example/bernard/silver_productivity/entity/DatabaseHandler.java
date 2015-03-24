@@ -95,7 +95,7 @@ public class DatabaseHandler  {
                         JsonObject object = jsonElement.getAsJsonObject();
                         Poster poster = gson.fromJson(object.get("poster"), Poster.class);
                         posterList.add(poster);
-                        System.out.println("get " + itr.next().toString());
+                        System.out.println("testget " + itr.next().toString());
                     //}
 
                     //tmpposterList = posterList;
