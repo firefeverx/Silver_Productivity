@@ -61,7 +61,7 @@ public class DatabaseHandler  {
     public void getForumPostByThread(int threadID)
     {
         System.out.println("1 getforum");
-        String url = WEBSERVICE +"/?threadID="+threadID;
+        String url = WEBSERVICE +"/get_poster_details.php?id="+threadID;
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, null, new AsyncHttpResponseHandler() {
 
@@ -82,17 +82,18 @@ public class DatabaseHandler  {
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
                     JsonParser parser = new JsonParser();
+                    //System.out.println("here " + response);
                     JsonArray data = parser.parse(response).getAsJsonArray();
-                    
+
 
                     Iterator<JsonElement> itr = data.iterator();
 
                     while (itr.hasNext()) {
-                        JsonElement jsonElement = itr.next();
-                        JsonObject object = jsonElement.getAsJsonObject();
-                        Poster poster = gson.fromJson(object.get("ForumPost"), Poster.class);
-                        posterList.add(poster);
-                        System.out.println("get " + poster.getContent());
+                        //JsonElement jsonElement = itr.next();
+                        //JsonObject object = jsonElement.getAsJsonObject();
+                        //Poster poster = gson.fromJson(object.get("ForumPost"), Poster.class);
+                        //posterList.add(poster);
+                        System.out.println("get " + itr.next().toString());
                     }
                     //setChanged();
                     //notifyObservers(planList);
