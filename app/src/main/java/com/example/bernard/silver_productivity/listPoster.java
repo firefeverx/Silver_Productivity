@@ -34,65 +34,70 @@ public class listPoster extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //activity = this;
-        View rootView = inflater.inflate(R.layout.activity_list_poster, container, false);
-        // setContentView(R.layout.activity_list_poster);
 
+            //activity = this;
+            View rootView = inflater.inflate(R.layout.activity_list_poster, container, false);
+            // setContentView(R.layout.activity_list_poster);
 
-        //to here.
+            if(refreshstatus == false) {
+            //to here.
 
-        //try {
-        ArrayList<Poster> posters = new ArrayList<Poster>();
-        Poster poster1 = new Poster("How to cope stress?", "Singapore", 5,8);
-        Poster poster2 = new Poster("How to communicate with elderly?", "Malaysia", 4,1);
-        Poster poster3 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster4 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster5 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster6 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster7 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster8 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        Poster poster9 = new Poster("How to do well in studies?", "Singapore", 3,5);
-        posters.add(poster1);
-        posters.add(poster2);
-        posters.add(poster3);
-        posters.add(poster4);
-        posters.add(poster5);
-        posters.add(poster6);
-        posters.add(poster7);
-        posters.add(poster8);
-        posters.add(poster9);
+            //try {
+            ArrayList<Poster> posters = new ArrayList<Poster>();
+            Poster poster1 = new Poster("How to cope stress?", "Singapore", 5, 8);
+            Poster poster2 = new Poster("How to communicate with elderly?", "Malaysia", 4, 1);
+            Poster poster3 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster4 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster5 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster6 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster7 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster8 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            Poster poster9 = new Poster("How to do well in studies?", "Singapore", 3, 5);
+            posters.add(poster1);
+            posters.add(poster2);
+            posters.add(poster3);
+            posters.add(poster4);
+            posters.add(poster5);
+            posters.add(poster6);
+            posters.add(poster7);
+            posters.add(poster8);
+            posters.add(poster9);
 
-        String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
-        String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
+            String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
+            String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
 
 //            ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strPosts);
 //           ListAdapter adapterSec = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.txtLocation, strLocation);
 
-        //ListAdapter adapter = new MyAdapter(getActivity(), posters);
-        ListView listPosters = (ListView)rootView.findViewById(R.id.listItemPosts);
+            //ListAdapter adapter = new MyAdapter(getActivity(), posters);
+            ListView listPosters = (ListView) rootView.findViewById(R.id.listItemPosts);
 //        MyAdapter adapter = new MyAdapter(getActivity(),R.layout.activity_list_poster, posters);
 
-        if(refreshstatus == false) {
+
             DatabaseHandler db = new DatabaseHandler();
             //List<Poster> tmp = db.getForumPostByThread(1);
-            db.getForumPostByThread(1);
+                try {
+                    db.getForumPostByThread(1);
+                }catch (Exception e)
+                {
+
+                }
             refreshstatus = true;
+
+            //System.out.print("tmp " + tmp.get(0).getAuthor());
+            MyAdapter adapter = new MyAdapter(getActivity(), posters);
+
+
+            listPosters.setAdapter(adapter);
+
+
+            listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+            });
         }
-        //System.out.print("tmp " + tmp.get(0).getAuthor());
-        MyAdapter adapter = new MyAdapter(getActivity(), posters);
-
-
-
-
-        listPosters.setAdapter(adapter);
-
-
-        listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
 
         //ListAdapter adapterSec = new MyAdapter(this, strLocation);
 
