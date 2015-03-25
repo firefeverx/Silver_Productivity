@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/single_answer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <!-- HEAD PORTRAIT -->
+    <ImageView
+        android:id = "@+id/head_portrait_answer"
+
+        android:src="@drawable/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- ANSWER LAYOUT -->
+    <RelativeLayout
+        android:id = "@+id/content_answer_field"
+        android:layout_toRightOf="@id/head_portrait_answer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <!-- CONTENT OF ANSWER -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text = "This is sample content"
+            android:id  = "@+id/content_answer_text"/>
+
+        <RelativeLayout
+            android:layout_below="@id/content_answer_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <!-- TIME OF SUBMIT -->
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:id = "@+id/answer_time_submit"
+                android:text="Sample time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!-- NUMBER OF LIKES -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content">
+
+                <!-- NUMBER -->
+                <TextView
+                    android:id = "@+id/number_like_number"
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- IMAGE -->
+                <ImageView
+                    android:id = "@+id/number_like_image"
+                    android:layout_toRightOf="@+id/number_like_number"
+                    android:src  = "@android:drawable/btn_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+         </RelativeLayout>
+
+        <!-- COMMENT OF ANSWER -->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_below="@id/content_answer_text"
+            android:id = "@+id/comment_answer_layout"
+            android:layout_height="wrap_content">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/list_comment_answer">
+
+            </ListView>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
