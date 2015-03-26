@@ -201,6 +201,8 @@ public class DatabaseHandler extends Observable {
                         poster.setAuthor(jObject.get("poster").getAsJsonObject().get("author").toString());
                         poster.setLocation(jObject.get("poster").getAsJsonObject().get("location").toString());
                         poster.setTime(jObject.get("poster").getAsJsonObject().get("time").toString());
+                        poster.setNumberOfLike(Integer.parseInt(jObject.get("poster").getAsJsonObject().get("likes").getAsString()));
+                        poster.setNumberOfComment(Integer.parseInt(jObject.get("poster").getAsJsonObject().get("comments").getAsString()));
 //
                         ArrayList <Comment> listcomment = new ArrayList<Comment>();
                         Comment comment = new Comment();
