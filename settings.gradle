@@ -1,1 +1,2 @@
-include ':app', ':android-async-http-1.4.6', ':mysql-connector-java-5.0.8-bin'
+include ':app', ':mysql-connector-java-5.0.8-bin'
+include ':app', ':android-async-http-1.4.6'

@@ -55,8 +55,8 @@ public class DatabaseHandler extends Observable {
 //    KEY_ADDRESS = "address",
 //    KEY_IMAGEURL = "imageUri";
 
-    public static final String WEBSERVICE = "http://10.0.2.2/Silver";
-    private static final String FILENAME = "C:\\Users\\GuoLong\\Desktop\\ver3\\StraightA_app\\data\\User.txt";
+    public static final String WEBSERVICE = "http://10.0.2.2/Silver/";
+   // private static final String FILENAME = "C:\\Users\\GuoLong\\Desktop\\ver3\\StraightA_app\\data\\User.txt";
     public static ArrayList<Poster> tmpposterList = new ArrayList<Poster>();
 
     private Gson gson = new Gson();
@@ -80,7 +80,7 @@ public class DatabaseHandler extends Observable {
 
     public void getForumPostByThread(int threadID) throws Exception {
         System.out.println("1 getforum");
-        String url = WEBSERVICE + "/get_poster_details.php?id=" + threadID;
+        String url = WEBSERVICE + "get_poster_details.php?id=" + String.valueOf(threadID);
         //AsyncHttpClient client = new AsyncHttpClient();
 
 //        HttpClient client = new DefaultHttpClient();
