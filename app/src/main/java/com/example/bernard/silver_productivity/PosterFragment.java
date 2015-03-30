@@ -22,10 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bernard.silver_productivity.entity.Comment;
+import com.example.bernard.silver_productivity.entity.DatabaseHandler;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -36,7 +40,7 @@ import java.util.ArrayList;
  * Use the {@link PosterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PosterFragment extends Fragment {
+public class PosterFragment extends Fragment implements Observer{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,6 +49,11 @@ public class PosterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View rootView;
+    private Poster poster = new Poster();
+    private int position;
+    private ArrayList<Comment> comments = new ArrayList<Comment>();
 
    // private OnFragmentInteractionListener mListener;
 
@@ -69,8 +78,17 @@ public class PosterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            //mParam1 = getArguments().getString(ARG_PARAM1);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
+            position = getArguments().getInt("position");
+            poster = DatabaseHandler.tmpposterList.get(position);
+            try {
+                //DatabaseHandler.getInstance().getComments(1);
+            } catch (Exception e) {
+                System.out.println ("ERROR");
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -78,7 +96,7 @@ public class PosterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_poster, container,false);
+        rootView = inflater.inflate(R.layout.fragment_poster, container,false);
 
         createTopLayout (rootView);
         createPostContentLayout (rootView);
@@ -107,27 +125,10 @@ public class PosterFragment extends Fragment {
         contentAnswerLayout.getLayoutParams().height = MainActivity.screenHeight/2;
 
         //Toast.makeText(getActivity(), "ANSWER", Toast.LENGTH_LONG).show();
-        Comment comment1 = new Comment();
-        comment1.setContent("Content of comment 1");
-        comment1.setNumberOfLike(1);
-        comment1.setSubmitTime("Time 1");
-        comments.add(comment1);
 
-
-        Comment comment2 = new Comment();
-        comment2.setContent("Content of comment 2");
-        comment2.setNumberOfLike(2);
-        comment2.setSubmitTime("Time 2");
-        comments.add(comment2);
-
-        Comment comment3 = new Comment();
-        comment3.setContent("Content of comment 3");
-        comment3.setNumberOfLike(3);
-        comment3.setSubmitTime("Time 3");
-        comments.add(comment3);
 
         Toast.makeText(getActivity(), String.valueOf(comments.size()), Toast.LENGTH_LONG).show();
-        PosterFragmentAdapter adapter = new PosterFragmentAdapter(getActivity(),R.layout.fragment_poster,comments);
+        PosterFragmentAdapter adapter = new PosterFragmentAdapter(getActivity(),R.layout.fragment_poster,DatabaseHandler.commentArrayList);
         listAnswers.setAdapter(adapter);
 
 
@@ -161,14 +162,17 @@ public class PosterFragment extends Fragment {
         Create sample Poster
          */
         Poster poster = new Poster();
-        poster.setNumberOfLike(14);
-        poster.setContent("Sample Content of poster");
-        poster.setAuthor("Sample Author of poster");
-        poster.setNumberOfComment(3);
-        poster.setTitle("Sample title of poster");
-        poster.setLocation ("Sample Location of poster");
-        poster.setTime ("14/2/2015");
+        poster = DatabaseHandler.tmpposterList.get(position);
+//        poster.setNumberOfLike(14);
+//        poster.setContent("Sample Content of poster");
+//        poster.setAuthor("Sample Author of poster");
+//        poster.setNumberOfComment(3);
+//        poster.setTitle("Sample title of poster");
+//        poster.setLocation ("Sample Location of poster");
+//        poster.setTime ("14/2/2015");
 
+        TextView locationPoster = (TextView) rootView.findViewById(R.id.location_poster);
+        locationPoster.setText(poster.getLocation());
         /*
         Number of Like layout
          */
@@ -262,7 +266,7 @@ public class PosterFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getFragmentManager().popBackStack();
             }
         });
 
@@ -283,9 +287,20 @@ public class PosterFragment extends Fragment {
                 /*
                 Go to Response Fragment
                  */
+
                 Page4 responseFragment = new Page4();
+                Bundle bundle = new Bundle();
+                try{
+                    bundle.putString("qid", (poster.getId()));
+                    bundle.putInt("position",position);
+                    responseFragment.setArguments(bundle);
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("page4");
                 fragmentTransaction.replace(R.id.container, responseFragment).commit();
+
             }
         });
 
@@ -314,6 +329,26 @@ public class PosterFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         //mListener = null;
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        try {
+            if (data instanceof String){
+                if (((String) data).compareTo("UPDATE COMMENT") == 0){
+                    createTopLayout (rootView);
+                    createPostContentLayout (rootView);
+                    createAnswerLayout(rootView);
+                    createBottomLayout (rootView);
+                }
+                String result = (String)data;
+                Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            }
+
+        }
+        catch (Exception ex) {
+            Toast.makeText(getActivity().getApplicationContext(), "Something went wrong while processing request..", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
