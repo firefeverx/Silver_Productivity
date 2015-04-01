@@ -30,14 +30,7 @@
             android:layout_toRightOf="@id/back_button"
             android:layout_centerHorizontal="true" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/response_poster_button"
-            android:clickable="true"
-            android:src = "@android:drawable/sym_action_chat"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true" />
+
     </RelativeLayout>
 
     <!-- CONTENT OF POSTER-->
@@ -72,8 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src  ="@android:drawable/btn_star"
-                    android:layout_below="@+id/text_number_like"
-                    android:layout_alignLeft="@+id/text_number_like"
+                    android:layout_toRightOf="@+id/text_number_like"
+
                     android:id = "@+id/image_number_like"/>
              </RelativeLayout>
 
@@ -117,6 +110,14 @@
                 android:id = "@+id/num_answer"
 
                 android:text="number of answer"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/response_poster_button"
+                android:clickable="true"
+                android:src = "@android:drawable/sym_action_chat"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
 
