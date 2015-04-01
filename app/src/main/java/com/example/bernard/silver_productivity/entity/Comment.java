@@ -10,17 +10,9 @@ public class Comment {
     private ImageView portraitImage;
     private int numberOfLike;
     private String submitTime;
-    private int id;
+
     public Comment(){
 
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setImageView (ImageView img){

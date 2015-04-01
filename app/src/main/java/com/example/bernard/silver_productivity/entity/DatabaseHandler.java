@@ -5,9 +5,7 @@ import android.content.SyncRequest;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.bernard.silver_productivity.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -34,7 +32,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,7 +44,6 @@ import java.util.Observable;
  */
 public class DatabaseHandler extends Observable {
 
-    private int largestCommentId = 10;
 //    private static final int DATABASE_VERSION = 1;
 //
 //    private static final String DATABASE_NAME = "posterManager",
@@ -62,21 +58,11 @@ public class DatabaseHandler extends Observable {
     public static final String WEBSERVICE = "http://10.0.2.2/Silver/";
    // private static final String FILENAME = "C:\\Users\\GuoLong\\Desktop\\ver3\\StraightA_app\\data\\User.txt";
     public static ArrayList<Poster> tmpposterList = new ArrayList<Poster>();
-    public static ArrayList<Comment> commentArrayList = new ArrayList<Comment>();
-    private static DatabaseHandler instance;
+
     private Gson gson = new Gson();
 
-    private DatabaseHandler() {
+    public DatabaseHandler() {
         //super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    public static DatabaseHandler getInstance(){
-        if (instance == null){
-            instance = new DatabaseHandler();
-            return instance;
-        }else{
-            return instance;
-        }
     }
 
     private void printErrorMessage(int statusCode) {
@@ -92,8 +78,8 @@ public class DatabaseHandler extends Observable {
         //notifyObservers(errorMessage);
     }
 
-    public void getForumPostByThread(final int threadID) throws Exception {
-        //System.out.println("1 getforum");
+    public void getForumPostByThread(int threadID) throws Exception {
+        System.out.println("1 getforum");
         String url = WEBSERVICE + "get_poster_details.php?id=" + String.valueOf(threadID);
         //AsyncHttpClient client = new AsyncHttpClient();
 
@@ -190,17 +176,15 @@ public class DatabaseHandler extends Observable {
                     System.out.println("here " + response);
                     JsonArray data = parser.parse(response).getAsJsonArray();
                     //Poster poster = null;
-
                     //ArrayList<Comment> listcomment = null;
 
-                   // System.out.println("testget " + data.size());
+                    System.out.println("testget " + data.size());
 
-                    tmpposterList.clear();
                     if(data != null)
                     {
                         for (int i = 0; i < data.size(); i++)
                         {
-                            //System.out.println("looping ");
+                            System.out.println("looping ");
                             JsonObject jObject = data.get(i).getAsJsonObject();
                             //System.out.println("output: " + jObject.get("poster").getAsJsonObject().get("title"));
                            Poster poster = new Poster();
@@ -220,25 +204,23 @@ public class DatabaseHandler extends Observable {
                         poster.setNumberOfLike(Integer.parseInt(jObject.get("poster").getAsJsonObject().get("likes").getAsString()));
                         poster.setNumberOfComment(Integer.parseInt(jObject.get("poster").getAsJsonObject().get("comments").getAsString()));
 //
-
                         ArrayList <Comment> listcomment = new ArrayList<Comment>();
-                           // listcomment = getComments(threadID);
-                     //   Comment comment = new Comment();
-                      //  comment.setContent(jObject.get("poster").getAsJsonObject().get("comments").toString());
+                        Comment comment = new Comment();
+                        comment.setContent(jObject.get("poster").getAsJsonObject().get("comments").toString());
 
-                       // listcomment.add(comment);
+                        listcomment.add(comment);
 
-                       poster.setComments(listcomment);
+                        poster.setComments(listcomment);
 
 //
-                        //posterList.add(poster);
+                        posterList.add(poster);
 
                         tmpposterList.add(poster);
                             System.out.println("before exit loop " + tmpposterList.get(0).getContent());
 
 
                         }
-                        //System.out.println("exit loop " + posterList.get(0).getId());
+                        System.out.println("exit loop " + posterList.get(0).getId());
                     }
 //                    for (JsonElement element : data){
 //                        System.out.print("entering ");
@@ -278,16 +260,14 @@ public class DatabaseHandler extends Observable {
 //                    }
 
                     //tmpposterList = posterList;
-                    //System.out.println("size " + tmpposterList.size());
+                    System.out.println("size " + tmpposterList.size());
 
                     setChanged();
                     notifyObservers(posterList);
                     }
                     catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                }
+                    }
 
 
             }
@@ -306,123 +286,6 @@ public class DatabaseHandler extends Observable {
 
 
     }
-
-    /**
-     * Add new Comment to database
-     * @param comment
-     * @param questionId
-     * @throws Exception
-     */
-    public void addComments(Comment comment, String questionId) throws Exception {
-
-        String content = comment.getContent();
-        String likes = String.valueOf(comment.getNumberOfLike());
-
-        String url = WEBSERVICE + "add_comment.php?id=" + largestCommentId++ + "&content=" + content + "&likes=" + likes + "&qid=" + questionId;
-        System.out.println (url);
-
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        client.get(url, null, new AsyncHttpResponseHandler() {
-
-
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        Toast.makeText(MainActivity.activity,"SUCESS", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        Toast.makeText(MainActivity.activity,"FAILURE", Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-
-    }
-
-    /**
-     * Get Comment from the database
-     * @param questionId
-     * @throws Exception
-     */
-    public void getComments(int questionId) throws Exception {
-
-        commentArrayList = new ArrayList<Comment>();
-        //final ArrayList<Comment> comments = new ArrayList<Comment>();
-        //String content = comment.getContent();
-        //String likes = String.valueOf(comment.getNumberOfLike());
-
-        String url = WEBSERVICE + "get_comment.php?id=" + String.valueOf(questionId);
-
-
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        client.get(url, null, new AsyncHttpResponseHandler() {
-
-
-                    @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
-
-                        String response = null;
-                        try {
-                            response = new String(bytes,"UTF-8");
-                            GsonBuilder gsonBuilder = new GsonBuilder();
-                            Gson gson = gsonBuilder.create();
-                            JsonParser parser = new JsonParser();
-
-                            JsonArray data = parser.parse(response).getAsJsonArray();
-                            if (data == null) return;
-                            System.out.println ("COMENT DATA SIZE " + data.size());
-                            for (int count = 0; i < data.size(); i++)
-                            {
-
-                                JsonObject jObject = data.get(i).getAsJsonObject();
-                                //System.out.println("output: " + jObject.get("poster").getAsJsonObject().get("title"));
-                                Comment comment = new Comment();
-//
-                                comment.setContent(jObject.get("poster").getAsJsonObject().get("content").toString());
-//                        //poster.setComments(jObject.get(""));
-                                comment.setNumberOfLike(Integer.parseInt(jObject.get("poster").getAsJsonObject().get("likes").getAsString()));
-
-//
-                              //  ArrayList <Comment> listcomment = new ArrayList<Comment>();
-                               // Comment comment = new Comment();
-                                //comment.setContent(jObject.get("poster").getAsJsonObject().get("comments").toString());
-
-                                commentArrayList.add(comment);
-
-                               // poster.setComments(listcomment);
-
-//
-                               // posterList.add(poster);
-
-                                //tmpposterList.add(poster);
-                               // System.out.println("before exit loop " + tmpposterList.get(0).getContent());
-
-
-                            }
-                            setChanged();
-                            notifyObservers("UPDATE COMMENT");
-                            //System.out.println("exit loop " + posterList.get(0).getId());
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-
-
-
-                    }
-
-                    @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
-                    }
-                }
-
-        );
-
-        //return commentArrayList;
-    }
-
 
 
 }

@@ -25,7 +25,7 @@
                 android:text="Location: "
                 android:id="@+id/txtLocation" />
 
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnComment"
@@ -43,7 +43,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp" />
 
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnLike"
