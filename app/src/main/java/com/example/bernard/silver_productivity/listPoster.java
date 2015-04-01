@@ -81,7 +81,8 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
             //List<Poster> tmp = db.getForumPostByThread(1);
                 //String returned = null;
                 try {
-                    db.getForumPostByThread(1);
+                    //db.getForumPostByThread(1);
+                    db.getAllPoster();
 
                     System.out.println("i am here size " + DatabaseHandler.tmpposterList.get(0).getContent());
 

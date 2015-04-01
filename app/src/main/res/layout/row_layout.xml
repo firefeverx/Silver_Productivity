@@ -23,16 +23,19 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Location: "
-                android:id="@+id/txtLocation" />
+                android:id="@+id/txtLocation"
+                android:layout_gravity="top"
+                android:layout_marginTop="120dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnComment"
                 android:src="@drawable/ic_launcher"
-                android:layout_gravity="left"
+                android:layout_gravity="top|left"
                 android:layout_marginLeft="100dp"
-                android:background="#00000000" />
+                android:background="#00000000"
+                android:layout_marginTop="100dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,24 +43,28 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="5"
                 android:id="@+id/txtnumofcomments"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp" />
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="120dp" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnLike"
                 android:src="@drawable/ic_launcher"
-                android:layout_gravity="left"
+                android:layout_gravity="top|left"
                 android:layout_marginLeft="20dp"
-                android:background="#00000000" />
+                android:background="#00000000"
+                android:layout_marginTop="100dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="10"
-                android:id="@+id/txtnumoflikes" />
+                android:id="@+id/txtnumoflikes"
+                android:layout_gravity="top"
+                android:layout_marginTop="120dp" />
 
         </LinearLayout>
 
