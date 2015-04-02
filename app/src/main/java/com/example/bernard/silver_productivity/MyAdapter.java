@@ -13,7 +13,7 @@ import com.example.bernard.silver_productivity.entity.Poster;
 import java.util.ArrayList;
 
 class MyAdapter extends ArrayAdapter<Poster> {
-
+//
     private String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
     private String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
     private String[] strComments = new String[]{"5", "4", "3"};
@@ -24,7 +24,7 @@ class MyAdapter extends ArrayAdapter<Poster> {
     public MyAdapter(Context context, ArrayList<Poster> posters) {
         super(context, R.layout.row_layout);
         this.posters = posters;
-        System.out.println (getCount());
+        //System.out.println (getCount());
 
 
     }
@@ -70,6 +70,7 @@ class MyAdapter extends ArrayAdapter<Poster> {
     public int getCount() {
         return posters.size();
     }
+
 
     @Override
     public Poster getItem(int position) {
