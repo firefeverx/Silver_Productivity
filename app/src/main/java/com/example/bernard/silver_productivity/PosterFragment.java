@@ -80,7 +80,10 @@ public class PosterFragment extends Fragment implements Observer{
         if (getArguments() != null) {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
-            position = getArguments().getInt("position");
+
+            //position = getArguments().getInt("position");
+            position = listPoster.clickedPosition;
+            System.out.println("on clicked pos "+ position);
             poster = DatabaseHandler.tmpposterList.get(position);
             try {
                 //DatabaseHandler.getInstance().getComments(1);

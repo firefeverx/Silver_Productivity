@@ -23,10 +23,12 @@ import java.util.Observer;
 
 public class listPoster extends Fragment implements Observer, AdapterView.OnItemClickListener {
 //
+    public static int clickedPosition = 0;
     //public static listPoster activity;
     private static boolean refreshstatus = false;
     private List<Poster> posterList;
     private MyAdapter adapter;
+
 
     private View rootView;
 
@@ -191,6 +193,8 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         PosterFragment posterFragment = new PosterFragment();
         int objectPosition = position;
+        clickedPosition = position;
+        System.out.println("on clicked pos "+position);
         Bundle bundle = new Bundle();
         bundle.putInt("postion",objectPosition);
 
