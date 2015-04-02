@@ -24,7 +24,7 @@ class MyAdapter extends ArrayAdapter<Poster> {
     public MyAdapter(Context context, ArrayList<Poster> posters) {
         super(context, R.layout.row_layout);
         this.posters = posters;
-        //System.out.println (getCount());
+        System.out.println (getCount());
 
 
     }
@@ -70,7 +70,6 @@ class MyAdapter extends ArrayAdapter<Poster> {
     public int getCount() {
         return posters.size();
     }
-
 
     @Override
     public Poster getItem(int position) {

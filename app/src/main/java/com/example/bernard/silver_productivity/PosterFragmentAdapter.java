@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by LEBAO_000 on 12/02/2015.
  */
 public class PosterFragmentAdapter extends ArrayAdapter<Comment> {
-
+//
     private static PosterFragmentAdapter instance = null;
     private ArrayList<Comment> comments = new ArrayList<Comment>();
     private Comment comment;
@@ -84,7 +84,7 @@ public class PosterFragmentAdapter extends ArrayAdapter<Comment> {
         Time of submit
          */
         TextView submitTime = (TextView) v.findViewById(R.id.answer_time_submit);
-        submitTime.setText(comment.getSubmitTime());
+        //submitTime.setText(comment.getSubmitTime());
 
         /*
         Number of Like

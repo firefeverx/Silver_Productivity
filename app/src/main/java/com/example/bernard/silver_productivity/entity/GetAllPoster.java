@@ -75,7 +75,7 @@ public class GetAllPoster  {
 
     // products JSONArray
     JSONArray products = null;
-
+//
     public void retrieveAllPoster() throws IOException
     {
         /*

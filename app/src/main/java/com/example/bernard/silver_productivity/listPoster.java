@@ -22,13 +22,12 @@ import java.util.Observer;
 
 
 public class listPoster extends Fragment implements Observer, AdapterView.OnItemClickListener {
-
 //
     //public static listPoster activity;
     private static boolean refreshstatus = false;
     private List<Poster> posterList;
     private MyAdapter adapter;
-    DatabaseHandler db = new DatabaseHandler();
+
     private View rootView;
 
     @Override
@@ -64,8 +63,8 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 //            posters.add(poster8);
 //            posters.add(poster9);
 
-            String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
-            String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
+//            String[] strPosts = new String[]{"How to cope stress?", "How to communicate with elderly?", "How to do well in studies?"};
+//            String[] strLocation = new String[]{"Singapore", "Malaysia", "Singapore"};
 
 //            ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strPosts);
 //           ListAdapter adapterSec = new ArrayAdapter<String>(this, R.layout.row_layout, R.id.txtLocation, strLocation);
@@ -75,7 +74,7 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 //        MyAdapter adapter = new MyAdapter(getActivity(),R.layout.activity_list_poster, posters);
 
 
-                DatabaseHandler db = new DatabaseHandler();
+                DatabaseHandler db = DatabaseHandler.getInstance();
                 db.addObserver(this);
 
             //List<Poster> tmp = db.getForumPostByThread(1);
@@ -84,7 +83,7 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
                     //db.getForumPostByThread(1);
                     db.getAllPoster();
 
-                    //System.out.println("i am here size " + DatabaseHandler.tmpposterList.get(0).getContent());
+                    System.out.println("i am here size " + DatabaseHandler.tmpposterList.get(0).getContent());
 
 //                    MyAdapter adapter = new MyAdapter(getActivity(), DatabaseHandler.tmpposterList);
 //
@@ -95,7 +94,7 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
                     System.out.println(e.getMessage());
                 }
 
-                System.out.println("out");
+
 
 
 
@@ -117,19 +116,7 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 //            listPosters.setAdapter(adapter);
 
 
-            listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    System.out.println("click pos " + position);
-                    Toast.makeText(getActivity(),"CLICKED",Toast.LENGTH_LONG).show();
-                    //String listPostPicked = "you picked " + String.valueOf(ListPost.getItemAtPosition(position));
-                    PosterFragment posterFragment = new PosterFragment();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container,posterFragment).commit();
-                    //Toast.makeText(getActivity(), listPostPicked, Toast.LENGTH_LONG).show();
-                }
-            });
+            listPosters.setOnItemClickListener(this);
         }
 
         //ListAdapter adapterSec = new MyAdapter(this, strLocation);
@@ -187,12 +174,10 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
                         ListView listPosters = (ListView) rootView.findViewById(R.id.listItemPosts);
                         listPosters.setAdapter(adapter);
                         listPosters.setOnItemClickListener(this);
-
-
-
 //                        ListView listView = (ListView) getView().findViewById(R.id.listForum);
 //                        listView.setAdapter(customAdapter);
                         //listView.setOnItemClickListener(this);
+
                     }
                 }
             }
@@ -203,11 +188,16 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
     }
 
     @Override
-
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        PosterFragment posterFragment = new PosterFragment();
+        int objectPosition = position;
+        Bundle bundle = new Bundle();
+        bundle.putInt("postion",objectPosition);
 
-
-
+        posterFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                .addToBackStack("posterFragment").commit();
+        Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
     }
 
 
@@ -231,7 +221,7 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
         @Override
         protected String doInBackground(String... params) {
             try {
-                db.getForumPostByThread(1);
+                DatabaseHandler.getInstance().getForumPostByThread(1);
                 //System.out.println("testing " + returned);
             }catch (Exception e)
             {

@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by LEBAO_000 on 12/02/2015.
  */
 public class CommentAnswerAdapter extends ArrayAdapter<Comment> {
-
+//
     private static CommentAnswerAdapter instance = null;
     private ArrayList<Comment> comments = new ArrayList<Comment>();
     private Comment comment;

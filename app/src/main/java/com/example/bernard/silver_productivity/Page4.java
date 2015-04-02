@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bernard.silver_productivity.entity.Comment;
+import com.example.bernard.silver_productivity.entity.DatabaseHandler;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,12 +35,16 @@ public class Page4 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+//
     private static final int MAX_TEXT_COUNT = 150;
+
+    String result;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String questionId;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -71,6 +78,8 @@ public class Page4 extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            questionId = getArguments().getString("qid");
+
         }
     }
 
@@ -114,7 +123,24 @@ public class Page4 extends Fragment {
             @Override
             public void onClick(View v) {
                 String contentInput = inputText.getText().toString();
-                Toast.makeText(MainActivity.activity, "Submit: " + contentInput, Toast.LENGTH_LONG).show();
+                DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+                Comment comment = new Comment();
+                comment.setContent(result);
+                try {
+                    questionId = questionId.replace("\"","");
+                    databaseHandler.addComments(comment,questionId);
+                    PosterFragment posterFragment = new PosterFragment();
+                    int objectPosition = getArguments().getInt("position");
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("postion",objectPosition);
+                    posterFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                            .addToBackStack("posterFragment").commit();
+                    Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+              //  Toast.makeText(MainActivity.activity, "Submit: " + contentInput.Toast.LENGTH_LONG).show();
             }
         });
 
@@ -150,6 +176,7 @@ public class Page4 extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                    remainTextCount.setText(String.valueOf(MAX_TEXT_COUNT-count) + "characters remaining");
+                    result = String.valueOf(s);
             }
 
             @Override
@@ -202,6 +229,7 @@ public class Page4 extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
 
 
 
