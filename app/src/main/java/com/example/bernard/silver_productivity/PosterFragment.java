@@ -1,14 +1,12 @@
 package com.example.bernard.silver_productivity;
 
-import android.app.Activity;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +23,7 @@ import com.example.bernard.silver_productivity.entity.Comment;
 import com.example.bernard.silver_productivity.entity.DatabaseHandler;
 import com.example.bernard.silver_productivity.entity.Poster;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -301,7 +297,8 @@ public class PosterFragment extends Fragment implements Observer{
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("page4");
+                FragmentTransaction fragmentTransaction;
+                fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack("page4");
                 fragmentTransaction.replace(R.id.container, responseFragment).commit();
 
             }
