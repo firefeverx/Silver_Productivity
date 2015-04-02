@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/ngolebaoloc/GitHub/Silver_Productivity/android-async-http-1.4.6/android-async-http-master/sample/src/main/res/values-v14/colors.xml -->
+    <eat-comment/>
+    <color name="dialog_color">#FF333333</color>
+    <!-- From: file:/home/ngolebaoloc/GitHub/Silver_Productivity/android-async-http-1.4.6/android-async-http-master/sample/src/main/res/values-v14/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- API 14 theme customizations can go here. -->
+    </style>
+</resources>
