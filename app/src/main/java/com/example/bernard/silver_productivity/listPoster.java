@@ -118,7 +118,28 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 //            listPosters.setAdapter(adapter);
 
 
-            listPosters.setOnItemClickListener(this);
+            listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    int objectPosition = position;
+                    clickedPosition = position;
+                    System.out.println("on clicked pos "+position);
+                    //new loadCommentBackground().execute(position);
+                    DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+                    try {
+                        databaseHandler.getComments(0);
+                        PosterFragment posterFragment = new PosterFragment();
+
+                        // posterFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                                .addToBackStack("posterFragment").commit();
+                        Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         //ListAdapter adapterSec = new MyAdapter(this, strLocation);
@@ -175,7 +196,28 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 
                         ListView listPosters = (ListView) rootView.findViewById(R.id.listItemPosts);
                         listPosters.setAdapter(adapter);
-                        listPosters.setOnItemClickListener(this);
+                        listPosters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                int objectPosition = position;
+                                clickedPosition = position;
+                                System.out.println("on clicked pos "+position);
+                                //new loadCommentBackground().execute(position);
+                                DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+                                try {
+                                    databaseHandler.getComments(1);
+                                    PosterFragment posterFragment = new PosterFragment();
+
+                                    // posterFragment.setArguments(bundle);
+                                    getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                                            .addToBackStack("posterFragment").commit();
+                                    Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
 //                        ListView listView = (ListView) getView().findViewById(R.id.listForum);
 //                        listView.setAdapter(customAdapter);
                         //listView.setOnItemClickListener(this);
@@ -191,17 +233,25 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        PosterFragment posterFragment = new PosterFragment();
         int objectPosition = position;
         clickedPosition = position;
         System.out.println("on clicked pos "+position);
-        Bundle bundle = new Bundle();
-        bundle.putInt("postion",objectPosition);
+        //new loadCommentBackground().execute(position);
+        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
+        try {
+            databaseHandler.getComments(1);
+            PosterFragment posterFragment = new PosterFragment();
 
-        posterFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
-                .addToBackStack("posterFragment").commit();
-        Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
+            // posterFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                    .addToBackStack("posterFragment").commit();
+            Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -220,18 +270,31 @@ public class listPoster extends Fragment implements Observer, AdapterView.OnItem
         public void onFragmentInteraction(Uri uri);
     }
 
-    private class loadDataBackground extends AsyncTask<String,String,String>{
+    private class loadCommentBackground extends AsyncTask<Integer, String, String> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(Integer... strings) {
+            DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
             try {
-                DatabaseHandler.getInstance().getForumPostByThread(1);
-                //System.out.println("testing " + returned);
-            }catch (Exception e)
-            {
-                System.out.println(e.getMessage());
+                databaseHandler.getComments(strings[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
             return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String aVoid) {
+           // Bundle bundle = new Bundle();
+           // bundle.putInt("postion",objectPosition);
+            PosterFragment posterFragment = new PosterFragment();
+
+           // posterFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.container,posterFragment)
+                    .addToBackStack("posterFragment").commit();
+            Toast.makeText(getActivity(),"CLIKED", Toast.LENGTH_LONG).show();
         }
     }
 }

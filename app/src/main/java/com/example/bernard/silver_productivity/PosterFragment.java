@@ -2,6 +2,7 @@ package com.example.bernard.silver_productivity;
 
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import com.example.bernard.silver_productivity.entity.DatabaseHandler;
 import com.example.bernard.silver_productivity.entity.Poster;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -36,7 +38,7 @@ import java.util.Observer;
  * Use the {@link PosterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PosterFragment extends Fragment implements Observer{
+public class PosterFragment extends Fragment implements Observer, AdapterView.OnItemClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,6 +49,7 @@ public class PosterFragment extends Fragment implements Observer{
     private String mParam2;
 
     private View rootView;
+    ListView listAnswers;
     private Poster poster = new Poster();
     private int position;
     private ArrayList<Comment> comments = new ArrayList<Comment>();
@@ -116,7 +119,7 @@ public class PosterFragment extends Fragment implements Observer{
      * @param rootView
      */
     private void createAnswerLayout(View rootView) {
-        ListView listAnswers = (ListView)rootView.findViewById(R.id.list_answer);
+       listAnswers = (ListView)rootView.findViewById(R.id.list_answer);
 
         ArrayList<Comment> comments = new ArrayList<Comment>();
 
@@ -127,16 +130,12 @@ public class PosterFragment extends Fragment implements Observer{
 
 
         Toast.makeText(getActivity(), String.valueOf(comments.size()), Toast.LENGTH_LONG).show();
+        System.out.println ("COMMENT ARRAY LIST " + DatabaseHandler.commentArrayList);
         PosterFragmentAdapter adapter = new PosterFragmentAdapter(getActivity(),R.layout.fragment_poster,DatabaseHandler.commentArrayList);
         listAnswers.setAdapter(adapter);
 
 
-        listAnswers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        listAnswers.setOnItemClickListener(this);
 
     }
 
@@ -333,22 +332,43 @@ public class PosterFragment extends Fragment implements Observer{
 
     @Override
     public void update(Observable observable, Object data) {
+        ArrayList<Comment> commentList;
         try {
             if (data instanceof String){
-                if (((String) data).compareTo("UPDATE COMMENT") == 0){
-                    createTopLayout (rootView);
-                    createPostContentLayout (rootView);
-                    createAnswerLayout(rootView);
-                    createBottomLayout (rootView);
-                }
                 String result = (String)data;
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
             }
+            else {
+                if (data != null  ) {
 
+                    commentList = (ArrayList<Comment>)data;
+
+                    if (commentList != null) {
+                        //this.forumPostList = listForumPost;
+                        //for(Object o: forumPostList) {
+                        //Toast.makeText(getActivity().getApplicationContext(), ((ForumPost)o).toString(), Toast.LENGTH_LONG).show();
+                        //}
+                        PosterFragmentAdapter adapter =  new PosterFragmentAdapter(getActivity(),R.layout.single_answer_layout, DatabaseHandler.commentArrayList);
+
+                        listAnswers = (ListView) rootView.findViewById(R.id.list_answer);
+                        listAnswers.setAdapter(adapter);
+                        listAnswers.setOnItemClickListener(this);
+//                        ListView listView = (ListView) getView().findViewById(R.id.listForum);
+//                        listView.setAdapter(customAdapter);
+                        //listView.setOnItemClickListener(this);
+
+                    }
+                }
+            }
         }
         catch (Exception ex) {
             Toast.makeText(getActivity().getApplicationContext(), "Something went wrong while processing request..", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
     }
 
     /**
@@ -365,5 +385,6 @@ public class PosterFragment extends Fragment implements Observer{
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
 
 }
